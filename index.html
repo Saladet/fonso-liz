@@ -152,22 +152,35 @@
       background:#fff;
       cursor:pointer;
     }
-    .drawer-links{display:grid;gap:.75rem;margin-top:.8rem;}
+
+    /* ✅ MENÚ: sin “pastillas blancas”, más fino */
+    .drawer-links{display:grid;gap:.6rem;margin-top:.6rem;}
     .drawer-links a{
       text-decoration:none;
-      padding:.95rem .9rem;
-      border-radius:18px;
-      background:#fff;
-      border:1px solid rgba(122,46,58,.10);
-      box-shadow:0 10px 22px rgba(0,0,0,.06);
+      padding:.55rem .15rem;
+      border-radius:0;
+      background:transparent;
+      border:none;
+      box-shadow:none;
       text-transform:uppercase;
       letter-spacing:.18em;
-      font-size:.76rem;
-      color:var(--wine);
+      font-size:.78rem;
+      color:rgba(31,31,31,.75);
       font-weight:900;
+      position:relative;
     }
+    .drawer-links a::after{
+      content:"";
+      position:absolute;
+      left:0;bottom:-6px;
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, rgba(122,46,58,.35), rgba(107,123,85,.25), rgba(122,46,58,.18));
+      opacity:.7;
+    }
+    .drawer-links a:hover{color:var(--wine);}
 
-    /* HERO (sin “pastilla blanca”) */
+    /* HERO */
     .hero{
       min-height:100vh;
       padding:7.2rem 0 2.1rem;
@@ -188,6 +201,7 @@
         radial-gradient(900px 420px at 30% 20%, rgba(107,123,85,.18), rgba(0,0,0,0) 60%);
       z-index:1;
     }
+
     .hero-inner{
       position:relative;
       z-index:2;
@@ -241,7 +255,6 @@
       text-shadow:0 12px 30px rgba(0,0,0,.28);
     }
 
-    /* Bar inferior “glass” para countdown + CTA (elegante, no blanca sólida) */
     .hero-bottom{
       width:100%;
       max-width:760px;
@@ -609,6 +622,33 @@
     .foot-line{width:min(360px, 85vw);height:1px;background:rgba(255,255,255,.22);margin:.25rem auto;}
     .foot-meta{opacity:.92;font-size:.98rem;line-height:1.6;max-width:720px;}
 
+    /* ✅ DESKTOP: centrar contenido EN EL CENTRO DE LA IMAGEN (vertical y horizontal) */
+    @media(min-width:992px){
+      .hero-inner{
+        min-height:calc(100vh - 9.3rem);
+        justify-content:center;          /* centra vertical */
+        align-items:center;             /* centra horizontal */
+        padding-bottom:1.2rem;
+      }
+      .hero-top{ text-align:center; }
+      .hero-kicker{ justify-content:center; }
+      .hero-bottom{ margin:1.1rem auto 0; max-width:720px; }
+      .scroll-indicator{ display:none; } /* en desktop no aporta */
+    }
+
+    /* MOBILE: reducir altura efectiva del hero para que se vea “entero” más fácil */
+    @media(max-width:767px){
+      .hero{
+        min-height:92vh;
+        padding:6.3rem 0 1.6rem;
+      }
+      .hero-inner{
+        min-height:calc(92vh - 8.5rem);
+      }
+      .hero-title{font-size:2.65rem;}
+      .scroll-indicator{bottom:.75rem;}
+    }
+
     @media(min-width:768px){
       body::before{background-size:1100px auto;opacity:.06;}
       .venue-grid{grid-template-columns:1.1fr .9fr;}
@@ -649,8 +689,8 @@
       <a href="#venue" class="drawer-link">Ubicación</a>
       <a href="#memories" class="drawer-link">Galería</a>
       <a href="#schedule" class="drawer-link">Programa</a>
-      <a href="#faq" class="drawer-link">FAQ</a>
-      <a href="#rsvp" class="drawer-link">RSVP</a>
+      <a href="#faq" class="drawer-link">Preguntas</a>
+      <a href="#rsvp" class="drawer-link">Confirmar</a>
     </div>
   </aside>
 
@@ -690,15 +730,21 @@
         <div>
           <div class="kicker">Bienvenidos</div>
           <div class="h2">Nos hace muchísima ilusión</div>
-          <div class="lead">Esta web es para que no haya dudas: ubicación, horarios y RSVP.</div>
+          <div class="lead">
+            Gracias por acompañarnos. Aquí tenéis toda la info para el día: ubicación, horarios y confirmación de asistencia.
+          </div>
         </div>
       </div>
 
       <div class="cards-1">
         <div class="card">
-          <div class="card-title">Qué es esto</div>
-          <p>El <strong>23 de mayo</strong> celebramos nuestra boda en <strong>Bodegas José Luis Ferrer</strong>.</p>
-          <p>Confirmad asistencia cuando podáis.</p>
+          <div class="card-title">La idea</div>
+          <p>
+            El <strong>23 de mayo</strong> celebramos nuestra boda en <strong>Bodegas José Luis Ferrer</strong>, en Binissalem.
+          </p>
+          <p>
+            Si podéis, <strong>confirmad asistencia</strong> lo antes posible para organizarnos con la comida y los detalles.
+          </p>
         </div>
       </div>
     </div>
@@ -710,7 +756,7 @@
         <div>
           <div class="kicker">El lugar</div>
           <div class="h2">Bodegas José Luis Ferrer</div>
-          <div class="lead">Abrir mapa y listo.</div>
+          <div class="lead">La forma más fácil: abrir el mapa y listo.</div>
         </div>
       </div>
 
@@ -723,7 +769,7 @@
         <div class="venue-card">
           <div class="meta">
             <div><b>Zona</b><br/>Binissalem, Mallorca</div>
-            <div><b>Parking / transporte</b><br/>Por confirmar.</div>
+            <div><b>Parking / transporte</b><br/>Habrá parking en la bodega (indicaciones el mismo día).</div>
           </div>
 
           <button class="map-btn" onclick="window.open('https://maps.app.goo.gl/yKAVBkWa7R3Ftk6K7','_blank')">
@@ -768,17 +814,17 @@
         <div>
           <div class="kicker">Programa</div>
           <div class="h2">El día de la boda</div>
-          <div class="lead">Horarios orientativos.</div>
+          <div class="lead">Horarios orientativos (puede variar un poco).</div>
         </div>
       </div>
 
       <div class="schedule-grid">
-        <div class="slot"><div class="time">—:—</div><div><h4>Llegada</h4><p>Primer brindis.</p></div></div>
-        <div class="slot"><div class="time">—:—</div><div><h4>Ceremonia</h4><p>Lo justo y bonito.</p></div></div>
-        <div class="slot"><div class="time">—:—</div><div><h4>Cóctel</h4><p>Aperitivos y fotos.</p></div></div>
-        <div class="slot"><div class="time">—:—</div><div><h4>Comida</h4><p>Comer bien. Punto.</p></div></div>
-        <div class="slot"><div class="time">—:—</div><div><h4>Fiesta</h4><p>Música y copas.</p></div></div>
-        <div class="slot"><div class="time">—:—</div><div><h4>Fin</h4><p>Vuelta (si hay bus, aquí).</p></div></div>
+        <div class="slot"><div class="time">12:30</div><div><h4>Llegada</h4><p>Recepción y bienvenida.</p></div></div>
+        <div class="slot"><div class="time">13:00</div><div><h4>Ceremonia</h4><p>Ceremonia en la bodega.</p></div></div>
+        <div class="slot"><div class="time">13:30</div><div><h4>Cóctel</h4><p>Brindis, aperitivos y fotos.</p></div></div>
+        <div class="slot"><div class="time">15:00</div><div><h4>Comida</h4><p>Comida y sobremesa.</p></div></div>
+        <div class="slot"><div class="time">18:00</div><div><h4>Fiesta</h4><p>Música, barra y baile.</p></div></div>
+        <div class="slot"><div class="time">23:30</div><div><h4>Fin</h4><p>Cierre y vuelta.</p></div></div>
       </div>
     </div>
   </section>
@@ -787,17 +833,17 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <div class="kicker">FAQ</div>
+          <div class="kicker">Preguntas</div>
           <div class="h2">Preguntas frecuentes</div>
-          <div class="lead">Las típicas.</div>
+          <div class="lead">Lo típico que siempre sale.</div>
         </div>
       </div>
 
       <div class="faq">
-        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Dress code?</div><div class="faq-toggle">+</div></div><div class="faq-a">Elegante pero cómodo.</div></div>
-        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Parking / transporte?</div><div class="faq-toggle">+</div></div><div class="faq-a">Por confirmar.</div></div>
-        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Niños?</div><div class="faq-toggle">+</div></div><div class="faq-a">Por confirmar.</div></div>
-        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Y si llueve?</div><div class="faq-toggle">+</div></div><div class="faq-a">Hay plan B.</div></div>
+        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Dress code?</div><div class="faq-toggle">+</div></div><div class="faq-a">Elegante pero cómodo (boda en bodega, mejor evitar tacón fino).</div></div>
+        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Hay parking?</div><div class="faq-toggle">+</div></div><div class="faq-a">Sí, hay parking en la bodega.</div></div>
+        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Niños?</div><div class="faq-toggle">+</div></div><div class="faq-a">Si venís con peques, indicadlo en el formulario para contarlos bien.</div></div>
+        <div class="faq-item"><div class="faq-qrow"><div class="faq-q">¿Y si llueve?</div><div class="faq-toggle">+</div></div><div class="faq-a">Tranquilos: la bodega tiene plan B cubierto.</div></div>
       </div>
     </div>
   </section>
@@ -806,14 +852,14 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <div class="kicker">RSVP</div>
+          <div class="kicker">Confirmación</div>
           <div class="h2">Confirmar asistencia</div>
           <div class="lead">Modo demo: no se envía.</div>
         </div>
       </div>
 
       <div class="rsvp-wrap">
-        <div class="rsvp-head"><p>Quitado nombre/email para no liar.</p></div>
+        <div class="rsvp-head"><p>Completa los nombres y listo.</p></div>
         <div class="rsvp-body">
           <form class="form-grid" id="rsvpForm" onsubmit="handleRsvpSubmit(event)">
             <div class="form-row">
@@ -868,7 +914,7 @@
 
             <div class="form-row">
               <label class="label">Comentarios</label>
-              <textarea class="ta" name="comments"></textarea>
+              <textarea class="ta" name="comments" placeholder="Alergias, intolerancias o cualquier nota que debamos saber."></textarea>
             </div>
 
             <button type="submit" class="btn-submit">Enviar</button>
@@ -1069,3 +1115,4 @@
   </script>
 </body>
 </html>
+
