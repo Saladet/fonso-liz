@@ -32,6 +32,11 @@
       --shadow:0 18px 48px rgba(0,0,0,.10);
       --shadow-soft:0 12px 28px rgba(0,0,0,.08);
       --border:1px solid rgba(122,46,58,.10);
+
+      --glass-1: rgba(251,246,239,.68);
+      --glass-2: rgba(239,230,218,.55);
+      --glass-border: 1px solid rgba(255,255,255,.35);
+      --glass-shadow: 0 18px 40px rgba(0,0,0,.10);
     }
 
     body{
@@ -42,7 +47,6 @@
       overflow-x:hidden;
     }
 
-    /* Watermark chill con background */
     body::before{
       content:"";
       position:fixed;
@@ -63,13 +67,13 @@
       opacity:.95;
     }
 
-    /* HEADER (marca + drawer) */
     header{
       position:fixed;top:3px;left:0;right:0;
       z-index:50;
       padding:.85rem 0;
       pointer-events:none;
     }
+
     .nav-shell{
       pointer-events:auto;
       display:flex;align-items:center;justify-content:space-between;
@@ -79,7 +83,9 @@
       box-shadow:var(--shadow-soft);
       padding:.6rem .75rem;
       backdrop-filter: blur(10px);
+      gap:.6rem;
     }
+
     .brand{
       display:flex;align-items:baseline;gap:.55rem;
       font-family:"Cormorant Garamond";
@@ -97,6 +103,28 @@
       font-size:.62rem;
       color:rgba(31,31,31,.65);
       text-transform:uppercase;
+    }
+
+    @media(min-width:992px){
+      .nav-shell{
+        display:grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items:center;
+      }
+      .brand{
+        grid-column:2;
+        justify-self:center;
+        font-size:1.15rem;
+        letter-spacing:.12em;
+      }
+      .brand small{
+        font-size:.70rem;
+        letter-spacing:.22em;
+      }
+      .menu-btn{
+        grid-column:3;
+        justify-self:end;
+      }
     }
 
     .menu-btn{
@@ -152,13 +180,10 @@
       background:#fff;
       cursor:pointer;
     }
-
-    /* ✅ MENÚ: sin “pastillas blancas”, más fino */
     .drawer-links{display:grid;gap:.6rem;margin-top:.6rem;}
     .drawer-links a{
       text-decoration:none;
       padding:.55rem .15rem;
-      border-radius:0;
       background:transparent;
       border:none;
       box-shadow:none;
@@ -180,7 +205,6 @@
     }
     .drawer-links a:hover{color:var(--wine);}
 
-    /* HERO */
     .hero{
       min-height:100vh;
       padding:7.2rem 0 2.1rem;
@@ -255,10 +279,7 @@
       text-shadow:0 12px 30px rgba(0,0,0,.28);
     }
 
-    .hero-bottom{
-      width:100%;
-      max-width:760px;
-    }
+    .hero-bottom{width:100%;max-width:760px;}
     .hero-glass{
       background:rgba(251,246,239,.12);
       border:1px solid rgba(255,255,255,.22);
@@ -352,22 +373,23 @@
 
     .cards-1{display:grid;gap:1rem;}
     .card{
-      background:#fff;
+      background:linear-gradient(180deg, var(--glass-1), rgba(251,246,239,.45));
       border-radius:var(--radius-xl);
-      border:var(--border);
-      box-shadow:var(--shadow-soft);
-      padding:1.2rem 1.1rem;
+      border:var(--glass-border);
+      box-shadow:var(--glass-shadow);
+      padding:1.25rem 1.15rem;
       text-align:left;
+      backdrop-filter: blur(10px);
     }
     .card-title{
       font-size:.78rem;
-      letter-spacing:.18em;
+      letter-spacing:.22em;
       text-transform:uppercase;
-      color:var(--wine);
+      color:rgba(122,46,58,.92);
       font-weight:900;
-      margin-bottom:.5rem;
+      margin-bottom:.55rem;
     }
-    .card p{color:#3b3b3b;line-height:1.8;font-size:1.00rem;}
+    .card p{color:#3b3b3b;line-height:1.85;font-size:1.02rem;}
     .card p+p{margin-top:.8rem;}
 
     .venue-grid{display:grid;gap:1rem;align-items:stretch;}
@@ -394,7 +416,7 @@
       font-weight:900;
     }
     .venue-card{
-      background:rgba(239,230,218,.55);
+      background:linear-gradient(180deg, rgba(239,230,218,.60), rgba(251,246,239,.35));
       border:1px solid rgba(122,46,58,.08);
       border-radius:var(--radius-xl);
       padding:1.2rem 1.1rem;
@@ -404,6 +426,7 @@
       flex-direction:column;
       justify-content:space-between;
       gap:1rem;
+      backdrop-filter: blur(10px);
     }
     .meta{display:grid;gap:.55rem;color:var(--muted);font-size:.98rem;line-height:1.55;}
     .meta b{
@@ -428,11 +451,12 @@
     }
 
     .strip{
-      background:#fff;
-      border:var(--border);
+      background:linear-gradient(180deg, var(--glass-1), rgba(251,246,239,.45));
+      border:var(--glass-border);
       border-radius:var(--radius-xl);
-      box-shadow:var(--shadow);
+      box-shadow:var(--glass-shadow);
       overflow:hidden;
+      backdrop-filter: blur(10px);
     }
     .strip-main{position:relative;cursor:pointer;}
     .strip-main img{width:100%;height:300px;object-fit:cover;display:block;}
@@ -451,47 +475,70 @@
     .icon-btn{
       width:40px;height:40px;border-radius:14px;
       border:1px solid rgba(122,46,58,.16);
-      background:#fff;color:var(--wine);
+      background:rgba(251,246,239,.75);
+      color:var(--wine);
       cursor:pointer;
       box-shadow:0 10px 22px rgba(0,0,0,.06);
       font-size:1.15rem;
+      backdrop-filter: blur(8px);
     }
     .dots{display:flex;gap:.35rem;align-items:center;padding:.75rem 1rem 1rem;justify-content:center;}
     .dot{width:7px;height:7px;border-radius:999px;background:rgba(122,46,58,.22);cursor:pointer;}
     .dot.active{width:18px;background:var(--wine);}
 
+    /* ✅ PROGRAMA (cambio aquí) */
     .schedule-grid{display:grid;gap:1rem;}
     .slot{
-      background:#fff;
-      border:var(--border);
+      background:linear-gradient(180deg, rgba(251,246,239,.72), rgba(239,230,218,.50));
+      border:var(--glass-border);
       border-radius:var(--radius-xl);
-      box-shadow:var(--shadow-soft);
-      padding:1.05rem 1.0rem;
+      box-shadow:var(--glass-shadow);
+      padding:1.05rem 1.1rem;
       text-align:left;
-      display:flex;gap:1rem;align-items:flex-start;
+      display:flex;
+      gap:1rem;
+      align-items:flex-start;
+      backdrop-filter: blur(10px);
     }
+
+    /* ✅ Se elimina la “caja” y se vuelve etiqueta fina */
     .time{
-      min-width:72px;
-      padding:.55rem .6rem;
-      border-radius:14px;
-      background:rgba(239,230,218,.70);
-      border:1px solid rgba(122,46,58,.10);
+      min-width:auto;
+      padding:0;
+      border-radius:0;
+      background:transparent;
+      border:none;
       text-transform:uppercase;
-      letter-spacing:.18em;
-      font-size:.72rem;
-      color:rgba(31,31,31,.65);
+      letter-spacing:.22em;
+      font-size:1.35rem;
+      color:rgba(122,46,58,.85);
       font-weight:900;
-      text-align:center;
+      text-align:left;
+      font-family:"Cormorant Garamond";
+      line-height:1.1;
+      margin-top:.08rem;
     }
-    .slot h4{color:var(--wine);font-size:1.03rem;margin-bottom:.25rem;font-weight:900;}
-    .slot p{color:#555;line-height:1.65;font-size:.98rem;}
+
+    /* Pequeña línea vertical elegante */
+    .slot::before{
+      content:"";
+      width:2px;
+      align-self:stretch;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(122,46,58,.35), rgba(107,123,85,.20), rgba(122,46,58,.18));
+      opacity:.9;
+    }
+
+    .slot h4{color:var(--wine);font-size:1.05rem;margin-bottom:.25rem;font-weight:900;}
+    .slot p{color:#4f4b4a;line-height:1.65;font-size:.98rem;}
 
     .faq{
-      background:#fff;
-      border:var(--border);
+      background:linear-gradient(180deg, rgba(251,246,239,.72), rgba(239,230,218,.50));
+      border:var(--glass-border);
       border-radius:var(--radius-xl);
-      box-shadow:var(--shadow);
+      box-shadow:var(--glass-shadow);
       overflow:hidden;
+      backdrop-filter: blur(10px);
     }
     .faq-item{
       padding:1.0rem 1.0rem;
@@ -508,11 +555,12 @@
     .faq-item.open .faq-toggle{transform:rotate(45deg);}
 
     .rsvp-wrap{
-      background:#fff;
-      border:var(--border);
+      background:linear-gradient(180deg, rgba(251,246,239,.78), rgba(239,230,218,.52));
+      border:var(--glass-border);
       border-radius:var(--radius-xl);
-      box-shadow:var(--shadow);
+      box-shadow:var(--glass-shadow);
       overflow:hidden;
+      backdrop-filter: blur(10px);
     }
     .rsvp-head{
       padding:1.05rem 1.1rem;
@@ -533,10 +581,11 @@
       padding:.82rem .95rem;
       border-radius:var(--radius-pill);
       border:1px solid rgba(0,0,0,.14);
-      background:#faf7f3;
+      background:rgba(251,246,239,.75);
       font-size:1rem;
       outline:none;
       font-family:"DM Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      backdrop-filter: blur(8px);
     }
     textarea.ta{border-radius:var(--radius-lg);min-height:100px;resize:vertical;}
     .radios{display:flex;flex-wrap:wrap;gap:.85rem;}
@@ -622,29 +671,17 @@
     .foot-line{width:min(360px, 85vw);height:1px;background:rgba(255,255,255,.22);margin:.25rem auto;}
     .foot-meta{opacity:.92;font-size:.98rem;line-height:1.6;max-width:720px;}
 
-    /* ✅ DESKTOP: centrar contenido EN EL CENTRO DE LA IMAGEN (vertical y horizontal) */
     @media(min-width:992px){
-      .hero-inner{
-        min-height:calc(100vh - 9.3rem);
-        justify-content:center;          /* centra vertical */
-        align-items:center;             /* centra horizontal */
-        padding-bottom:1.2rem;
-      }
-      .hero-top{ text-align:center; }
-      .hero-kicker{ justify-content:center; }
-      .hero-bottom{ margin:1.1rem auto 0; max-width:720px; }
-      .scroll-indicator{ display:none; } /* en desktop no aporta */
+      .hero-inner{justify-content:center;align-items:center;padding-bottom:1.2rem;}
+      .hero-top{text-align:center;}
+      .hero-kicker{justify-content:center;}
+      .hero-bottom{margin:1.1rem auto 0;max-width:720px;}
+      .scroll-indicator{display:none;}
     }
 
-    /* MOBILE: reducir altura efectiva del hero para que se vea “entero” más fácil */
     @media(max-width:767px){
-      .hero{
-        min-height:92vh;
-        padding:6.3rem 0 1.6rem;
-      }
-      .hero-inner{
-        min-height:calc(92vh - 8.5rem);
-      }
+      .hero{min-height:92vh;padding:6.3rem 0 1.6rem;}
+      .hero-inner{min-height:calc(92vh - 8.5rem);}
       .hero-title{font-size:2.65rem;}
       .scroll-indicator{bottom:.75rem;}
     }
@@ -694,7 +731,6 @@
     </div>
   </aside>
 
-  <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -944,7 +980,6 @@
   </footer>
 
   <script>
-    /* Menú drawer */
     const drawer = document.getElementById("drawer");
     const drawerBackdrop = document.getElementById("drawerBackdrop");
     const menuBtn = document.getElementById("menuBtn");
@@ -958,14 +993,12 @@
     drawerBackdrop.addEventListener("click", closeDrawer);
     document.querySelectorAll(".drawer-link").forEach(a => a.addEventListener("click", closeDrawer));
 
-    /* FAQ */
     document.querySelectorAll(".faq-item").forEach(item => item.addEventListener("click", () => item.classList.toggle("open")));
 
-    /* Fecha (año automático: si ya pasó este año, usa el siguiente) */
     function getTargetDateAutoYear() {
       const now = new Date();
       const year0 = now.getFullYear();
-      const candidate = new Date(year0, 4, 23, 0, 0, 0); // mayo = 4
+      const candidate = new Date(year0, 4, 23, 0, 0, 0);
       return (candidate.getTime() < now.getTime()) ? new Date(year0 + 1, 4, 23, 0, 0, 0) : candidate;
     }
     const target = getTargetDateAutoYear();
@@ -975,7 +1008,6 @@
     document.getElementById("footerSub").textContent = `${dateStr} · Mallorca`;
     document.getElementById("brand-year").textContent = `· 23/05/${year}`;
 
-    /* Countdown */
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minsEl = document.getElementById("minutes");
@@ -991,7 +1023,6 @@
     }
     updateCountdown(); setInterval(updateCountdown, 60000);
 
-    /* Galería (nombres reales) */
     const gallery = [
       { src:"./images/img-1.jpg", caption:"" },
       { src:"./images/img-2.jpg", caption:"" },
@@ -1041,7 +1072,6 @@
 
     renderGallery();
 
-    /* RSVP dinámico (modo demo) */
     const attendanceDependent = document.getElementById("attendanceDependent");
     const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
     function updateAttendanceVisibility(){
